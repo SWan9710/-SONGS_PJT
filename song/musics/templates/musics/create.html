@@ -1,13 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>CREATE</h1>
-  <hr>
-  <form action="" method = "POST" enctype = "multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="생성">
-  </form>
-  <hr>
-  <a href="{% url 'musics:index' %}">[BACK]</a>
+  <div class="container">
+    <h3 style="text-align : center; padding-top: 30px;">REGISTER MUSIC</h3>
+    <br>
+    <div class="d-flex justify-content-center" 
+        style="border:2px groove; border-radius:0.5em; width : 80%; height:80%; margin:0 auto; padding:20;">
+      <form action="" method = "POST" enctype = "multipart/form-data">
+        {% csrf_token %}
+        <ol>
+          <li>
+            <label for="artist">가수명</label><br>
+            <input type="text" id="artist" name="artist">
+          </li>
+          <li>
+            <label for="title">노래제목</label><br>
+            <input type="text" id="title" name="title">
+          </li>
+        </ol>
+        <input type="submit" value="생성">
+      </form>
+      <hr>
+    </div>
+    <div class='d-flex justify-content-center m-2'>
+      <button class="btn" style="background-color:#CCEEFF" onclick="location.href={% url 'musics:index' %}">취소</button>
+    </div>
+  </div>
 {% endblock content %}
