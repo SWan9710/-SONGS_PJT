@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Music(models.Model):
     # 앨범 커버 이미지
-    image = models.ImageField()
+    image = models.ImageField(blank=True)
     # 노래 제목
     title = models.CharField(max_length=20)
     # 가수명

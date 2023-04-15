@@ -127,3 +127,11 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+# 이미지 넣기 위해 설정
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT =BASE_DIR / 'media'
