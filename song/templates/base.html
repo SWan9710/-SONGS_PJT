@@ -17,6 +17,7 @@
   
 </head>
 <body>
+  {% block nav %}
   <!-- 수정한 것 : 로고 이미지 넣으면 index로 연결, 오른쪽에 accounts 배치 -->
   <!-- 수정해야 할 것 : 메뉴바 어떻게 할지, accounts 항목 수정 (ex) 프로필 누르면 회원정보 수정 넣고 그런거)-->
   {% load static %}
@@ -54,7 +55,7 @@
           </li>
         </ul>
         <!--이 부분이 고친 것 -->
-        <ul class="nav justify-content-end">
+        <ul class="nav justify-content-end align-items-center">
           {% if request.user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'accounts:update' %}">회원정보수정</a>
@@ -71,6 +72,17 @@
               <input type="submit" value="회원탈퇴">
             </form>
           </li>
+          {% comment %} 수정사항 {% endcomment %}
+          <li class="nav-item">
+            <a href="{% url 'accounts:profile' user.username %}" class="d-flex-row">
+              <div class="image text-center">
+                <img src="{% static 'musics/base_profile.png' %}" \
+                alt="base_profile" width="50" height="40" class="rounded-circle">
+              </div>
+              <p>내 프로필</p>
+            </a>
+          </li>
+
           {% else %}
           <li class="nav-item">
             <a href="{% url 'accounts:login' %}">Login</a>
@@ -84,7 +96,7 @@
     </div>
   </nav>
 
-  {% block nav %}
+  
   {% endblock nav %}
 
   {% block content %}
