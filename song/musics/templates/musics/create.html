@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>CREATE</h1>
+  <hr>
+  <form action="" method = "POST" enctype = "multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="생성">
+  </form>
+  <hr>
+  <a href="{% url 'musics:index' %}">[BACK]</a>
+{% endblock content %}

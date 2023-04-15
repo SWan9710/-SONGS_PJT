@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>DETAIL</h2>
+  <hr>
+  {% if music.image %}
+    <img src="{{music.image.url}}" alt="{{music.image}}">
+  {% endif %}
+  <p>제목 : {{ music.title }} </p>
+  <p>가수 : {{ music.artist }} </p>
+  <p>장르 : {{ music.genre }} </p>
+  <p>{{ music.description }} </p>
+  <hr>
+  <form action="{% url 'musics:delete' music.pk %}" method='POST'>
+    {% csrf_token %}
+    <input type="submit" value='삭제'>
+  </form>
+  <a href="{% url 'musics:index' %}">[BACK]</a>
+  <a href="{% url 'musics:update' music.pk %}">[수정하기]</a>
+{% endblock content %}
+
