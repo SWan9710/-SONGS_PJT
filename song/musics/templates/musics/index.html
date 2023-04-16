@@ -45,6 +45,19 @@
     <p> 가수 : <a href="{% url 'musics:detail' music.pk %}">
       {{ music.artist }}
     </a></p>
+    {% if request.user.is_authenticated %}
+      <div>
+        <form action="{% url 'musics:likes' music.pk %}" method="POST">
+          {% csrf_token %}
+          {% if request.user in music.like_users.all %}
+            <input type="submit" value="좋아요 취소!">
+          {% else %}
+            <input type="submit" value="좋아요">
+          {% endif %}
+        </form>
+      </div>
+    {% endif %}
+
   {% endfor %}
   <hr>
   {% if request.user.is_authenticated %}

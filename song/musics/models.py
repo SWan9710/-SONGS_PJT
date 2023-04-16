@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 class Music(models.Model):
@@ -14,4 +15,10 @@ class Music(models.Model):
     genre = models.CharField(max_length=30)
     # 날씨별
     weather = models.CharField(max_length=30)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_musics')
 
+class Comment(models.Model):
+    music = models.ForeignKey(Music, on_delete=models.CASCADE) 
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    content = models.CharField(max_length=100)
