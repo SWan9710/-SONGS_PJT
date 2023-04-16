@@ -1,5 +1,5 @@
 from django import forms
-from .models import Music
+from .models import Music, Comment
 
 music_genre = [('전체', '전체'), ('발라드','발라드'), ('댄스', '댄스'), ('힙합','힙합'), ('재즈','재즈')]
 
@@ -17,4 +17,14 @@ class MusicForm(forms.ModelForm):
 
     class Meta:
         model = Music
-        fields = '__all__'
+        exclude = (
+            'user',
+            'like_users',
+        )
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        exclude = (
+            'music',
+            'user',
+        )
