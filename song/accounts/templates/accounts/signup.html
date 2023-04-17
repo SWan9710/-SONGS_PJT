@@ -1,12 +1,34 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block static %}
+  <link rel="stylesheet" href="{% static 'musics/css/signup.css' %}">
+{% endblock static %}
 
 {% block content %}
-<h1>회원가입</h1>
-<form action="{% url 'accounts:signup' %}" method ="POST">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" value="Submit">
-</form>
-
+<div class="center">
+  <h1>Sign Up</h1>
+  <form action="{% url 'accounts:signup' %}" method="post">
+    {% csrf_token %}
+      <div class="txt_field">
+        {{ form.username }}
+        <span></span>
+        <label>Username</label>
+      </div>
+      <div class="txt_field">
+        {{ form.password1 }}
+        <span></span>
+        <label>Create Password</label>
+      </div>
+      <div class="txt_field">
+        {{ form.password2 }}
+        <span></span>
+        <label>Confirm Password</label>
+      </div>
+      <input type="submit" value="Signup">
+      <div class="signup_link">
+        Already a user? <a href="{% url 'accounts:login' %}">Login</a>
+      </div>
+  </form>
+</div>
 {% endblock content %}
-
