@@ -8,16 +8,7 @@
         style="border:2px groove; border-radius:0.5em; width : 80%; height:80%; margin:0 auto; padding:20;">
       <form action="" method = "POST" enctype = "multipart/form-data">
         {% csrf_token %}
-        <ol>
-          <li>
-            <label for="artist">가수명</label><br>
-            <input type="text" id="artist" name="artist">
-          </li>
-          <li>
-            <label for="title">노래제목</label><br>
-            <input type="text" id="title" name="title">
-          </li>
-        </ol>
+        {{ form.as_p }}
         <input type="submit" value="생성">
       </form>
       <hr>
