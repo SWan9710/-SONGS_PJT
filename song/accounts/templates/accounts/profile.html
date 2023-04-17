@@ -1,35 +1,46 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
   <h1>{{ person.username }}님의 프로필</h1>
   <hr>
-  {% comment %} 수정사항 {% endcomment %}
-  <div class="d-flex justify-content-end">
-    <div class="like_music me-4 text-center">
-      {{person.like_musics.count}}
-      <p>좋아하는 노래수</p>
-    </div>
-    <div class="followers me-4 text-center">
-      {{ person.followers.count}}
-      <p>팔로워</p>
-    </div>
 
-    <div class="following me-4 text-center">
-      {{ person.followings.count }}
-      <p>팔로잉</p>
-    </div>
+  <div class="main_image">
+    <img src="{% static 'musics/lecord.png' %}"alt="base_profile" width="1400" height="1000" class="border position-relative img-fluid">
+  
+  
+    <div class="main_profile border top-50 start-50 translate-middle badge" style="position: absolute;">
+      <div class="d-flex justify-content-end">
 
+        <div class="like_music me-4 text-center">
+          {{person.like_musics.count}}
+          <p>좋아하는 노래수</p>
+        </div>
+
+        <div class="followers me-4 text-center">
+          {{ person.followers.count}}
+          <p>팔로워</p>
+        </div>
+    
+        <div class="following me-4 text-center">
+          {{ person.followings.count }}
+          <p>팔로잉</p>
+        </div>
+      </div>
+      <form class="d-flex justify-content-end pe-3" action="{% url 'accounts:follow' person.pk %}" method='POST'>
+        {% csrf_token %}
+        {% if request.user in person.followers.all %}
+          <button type="submit" class="btn btn-danger rounded-pill">언팔로우</button>
+        {% else %}
+          <button type="submit" class="btn btn-primary rounded-2" style="width : 200px;" >팔로우</button>
+        {% endif %}
+      </form>
+    </div> 
+    
   </div>
-
   <br>
-  <form class="d-flex justify-content-end pe-3" action="{% url 'accounts:follow' person.pk %}" method='POST'>
-    {% csrf_token %}
-    {% if request.user in person.followers.all %}
-      <button type="submit" class="btn btn-danger rounded-pill">언팔로우</button>
-    {% else %}
-      <button type="submit" class="btn btn-primary rounded-2" style="width : 200px;" >팔로우</button>
-    {% endif %}
-  </form>
+ 
   <br>
   <h5>{{ person.username }}님이 작성한 게시글</h5>
   {% for music in person.music_set.all %}

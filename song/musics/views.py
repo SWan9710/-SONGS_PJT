@@ -32,7 +32,7 @@ def create(request):
             music = form.save(commit=False)
             music.user = request.user
             music.save()
-            return redirect('musics:detail', music.pk)
+            return redirect('musics:detail', music.pk) 
     else:
         form = MusicForm()
     context = {'form':form}
