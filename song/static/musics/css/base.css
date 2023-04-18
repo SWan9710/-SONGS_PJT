@@ -4,7 +4,6 @@ body{
   height: 100vh;
   overflow: hidden;
   background: white;
-}
-.nav-item {
+  font-family: 'Poppins', sans-serif;
   list-style: none;
 }

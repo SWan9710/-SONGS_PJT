@@ -10,6 +10,13 @@
   <!-- css 연결 -->
   <link rel="stylesheet" href="{% static 'musics/css/base.css' %}">
   {% block static %}{% endblock static %}
+  <!-- boxicon 연결-->
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  <!-- font 연결-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <title>Music</title>
 </head>
 <body>
@@ -28,26 +35,42 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <!--home-->
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'musics:index' %}">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
+
+          <!-- 계정 dropdown -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
+              내 프로필
             </a>
+            <!-- dropdown 항목들 -->
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <!-- profile 들어가는 계정 -->
+              <li>
+                <a href="{% url 'accounts:profile' user.username %}">
+                <button type="submit" class="dropdown-item">계정</button>
+                </a>
+              </li>
+      
+              <!-- logout 버튼 -->
+              <li>
+                <form class="dropdown-item" action="{% url 'accounts:logout' %}" method="POST">
+                  {% csrf_token %}
+                  <button type="submit" class="dropdown-item">Logout</button>
+                </form>
+              </li>
+              <!-- 회원탈퇴 버튼 -->
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li>
+                <form class="dropdown-item" action="{% url 'accounts:delete' %}" method="POST">
+                  {% csrf_token %}
+                  <button type="submit" class="dropdown-item">회원탈퇴</button>
+                </form>
+              </li>
             </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
           </li>
         </ul>
         <!--이 부분이 고친 것 -->
@@ -56,23 +79,12 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'accounts:update' %}">회원정보수정</a>
           </li>
-          <li class="nav-item">
-            <form action="{% url 'accounts:logout' %}" method="POST">
-              {% csrf_token %}
-              <input type="submit" value="Logout">
-            </form>
-          </li>
-          <li class="nav-item">
-            <form action="{% url 'accounts:delete' %}" method="POST">
-              {% csrf_token %}
-              <input type="submit" value="회원탈퇴">
-            </form>
-          </li>
+>
           {% comment %} 수정사항 {% endcomment %}
           <li class="nav-item">
             <a href="{% url 'accounts:profile' user.username %}" class="d-flex-row">
               <div class="image text-center">
-                <img src="{% static 'musics/base_profile.png' %}" \
+                <img src="{% static 'musics/base_profile.png' %}"
                 alt="base_profile" width="50" height="40" class="rounded-circle">
               </div>
               <p>내 프로필</p>
@@ -81,7 +93,7 @@
 
           {% else %}
           <li class="nav-item">
-            <a href="{% url 'accounts:login' %}">Login</a>
+            <a class="btn btn-outline-blue" href="{% url 'accounts:login' %}">Login</a>
           </li>
           {% endif %}    
         </ul>
