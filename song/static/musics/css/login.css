@@ -62,6 +62,10 @@ form .txt_field{
 .txt_field input:valid ~ span::before{
   width: 100%;
 }
+.error{
+  color:red;
+  font-size: 12px;
+}
 .pass{
   margin: -5px 0 20px 5px;
   color: #a6a6a6;

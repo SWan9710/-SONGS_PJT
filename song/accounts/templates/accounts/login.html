@@ -21,6 +21,9 @@
         <span></span>
         <label>Password</label>
       </div>
+      {% if form.errors %}
+      <p class="error">아이디, 비밀번호가 일치하지 않습니다. 다시 시도해주세요.</p>
+      {% endif %}
       <div class="pass">Forgot Password?</div>
       <input type="submit" value="Login">
       <div class="signup_link">
