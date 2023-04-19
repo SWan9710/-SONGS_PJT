@@ -35,25 +35,35 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 justify-content-end">
           <!--home-->
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'musics:index' %}">Home</a>
           </li>
+          
+          <!--create-->
+          <li class="nav-item">
+            {% if request.user.is_authenticated %}
+            <a class="nav-link active" aria-current="page" href="{% url 'musics:create' %}">Create</a>
+            {% else %}
+            <a class="nav-link active" aria-current="page" href="{% url 'accounts:login' %}">Create</a>
+            {% endif %}
+          </li>
 
+          {% if request.user.is_authenticated %}
           <!-- 계정 dropdown -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               내 프로필
             </a>
             <!-- dropdown 항목들 -->
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu" style="left:-60px">
               <!-- profile 들어가는 계정 -->
               <li>
-                <a href="{% url 'accounts:profile' user.username %}">
+                <a class="btn btn-outline-blue" href="{% url 'accounts:profile' user.username %}">
                 <button type="submit" class="dropdown-item">계정</button>
                 </a>
-              </li>
+              </li> 
       
               <!-- logout 버튼 -->
               <li>
@@ -75,13 +85,13 @@
         </ul>
         <!--이 부분이 고친 것 -->
         <ul class="nav justify-content-end align-items-center">
-          {% if request.user.is_authenticated %}
-          <li class="nav-item">
+          
+          {% comment %} <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'accounts:update' %}">회원정보수정</a>
-          </li>
+          </li> 
 >
           {% comment %} 수정사항 {% endcomment %}
-          <li class="nav-item">
+          {% comment %} <li class="nav-item">
             <a href="{% url 'accounts:profile' user.username %}" class="d-flex-row">
               <div class="image text-center">
                 <img src="{% static 'musics/base_profile.png' %}"
@@ -89,7 +99,7 @@
               </div>
               <p>내 프로필</p>
             </a>
-          </li>
+          </li> {% endcomment %}
 
           {% else %}
           <li class="nav-item">
